@@ -3,12 +3,25 @@ require "ruby2d"
 set title: "Word wrap"
 
 @text_to_render = "Some long text that might not fit on the screen"
+@max_text_width = 200
 
-@text = Text.new(@text_to_render, x: 10, y: 10, size: 20)
-@text.remove
+def render_bounding_box
+  Rectangle.new(
+    x: 10, y: 10, width: @max_text_width, height: 300, color: 'purple', z: 1
+  )
+end
 
-width = @text.width
+def render_text_width(text)
+  Text.new(text.width, x: 510, y: 10, size: 20)
+end
 
-@width_text = Text.new(width, x: 10, y: 40, size: 20)
+def render_text(text)
+  Text.new(text, x: 10, y: 10, size: 20, z: 2)
+end
+
+rendered_text = render_text(@text_to_render)
+render_text_width(rendered_text)
+render_bounding_box
 
 show
+
